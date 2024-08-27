@@ -1,0 +1,14 @@
+descriptors: [
+    'prot_hel_dist',
+    'pairwise_sep_dist',
+    'com_calpha_angles',
+    'len_of_hel',
+    'angles_between_hel',
+    'com_clamp',
+    'charge_clamp_dist',
+    'charge_clamp_angles',
+    'acc_per_hel',
+    'dssp_hel',
+    'sse_content',
+    'dssp_extra',
+]

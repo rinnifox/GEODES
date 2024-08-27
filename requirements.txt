@@ -1,0 +1,14 @@
+pandas~=1.3.3
+numpy~=1.21.2
+Bio~=1.3.2
+PyYAML~=6.0
+tqdm~=4.62.3
+plotly~=5.10.0
+seaborn~=0.12.0
+
+# Testing
+pytest
+codecov
+pytest-cov
+pre-commit
+pytest-benchmark
