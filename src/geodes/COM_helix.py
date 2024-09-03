@@ -1,7 +1,6 @@
 import numpy as np
 
-import constraints
-import utils
+from geodes import constraints, utils
 
 
 def _calc_COM_helix(chain, ref):

@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-import utils
-from COM_protein import _calc_COM_protein
+from geodes import utils
+from geodes.COM_protein import _calc_COM_protein
 
 
 def _calc_COM_clamp(chain, atom_struct, charge_clamps):
@@ -74,7 +74,7 @@ def COM_clamp_to_pandas(pdb_file, clamp_resid, protein_name=None, **kwargs):
 
     """
     cols_comclampdist = ['prot_name'] + [f'Dist COM-clamp{i}' for i in range(1, 4)]
-    df_clamps = pd.DataFrame(columns=cols_comclampdist)
+    #df_clamps = pd.DataFrame(columns=cols_comclampdist)
     clamps = None
 
     try:
@@ -95,5 +95,6 @@ def COM_clamp_to_pandas(pdb_file, clamp_resid, protein_name=None, **kwargs):
     if clamps is not None:
         for dist in clamps:
             data_clamps.append(dist)
-    df_clamps = df_clamps.append(pd.Series(data_clamps, index=cols_comclampdist[0:len(data_clamps)]), ignore_index=True)
+    df_clamps = pd.DataFrame([data_clamps], columns=cols_comclampdist)
+    #df_clamps = pd.concat([df_clamps, pd.Series(data_clamps, index=cols_comclampdist[0:len(data_clamps)])], ignore_index=True)
     return df_clamps

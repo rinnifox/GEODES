@@ -2,7 +2,7 @@ from Bio import PDB
 import numpy as np
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_charge_clamp_angles(chain, charge_clamps):
@@ -78,7 +78,7 @@ def charge_clamp_angles_to_pandas(pdb_file, clamp_resid, protein_name=None, **kw
 
     """
     cols_cl_angle = ['prot_name'] + [f'Angle clamp{elem}-{el}' for elem in range(1, 3) for el in range(elem+1, 4)]
-    df_cl_angles = pd.DataFrame(columns=cols_cl_angle)
+    #df_cl_angles = pd.DataFrame(columns=cols_cl_angle)
     clamp_angle = None
     try:
         clamp_angle = calc_charge_clamp_angles(pdb_file, clamp_resid)
@@ -97,5 +97,6 @@ def charge_clamp_angles_to_pandas(pdb_file, clamp_resid, protein_name=None, **kw
     if clamp_angle is not None:
         for elem in clamp_angle:
             cl_angle.append(clamp_angle[elem])
-    df_cl_angles = df_cl_angles.append(pd.Series(cl_angle, index=cols_cl_angle[0:len(cl_angle)]), ignore_index=True)
+    df_cl_angles = pd.DataFrame([cl_angle], columns=cols_cl_angle)
+    #df_cl_angles = pd.concat([df_cl_angles, pd.Series(cl_angle, index=cols_cl_angle[0:len(cl_angle)])], ignore_index=True)
     return df_cl_angles

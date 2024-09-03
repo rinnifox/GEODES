@@ -2,7 +2,7 @@ from Bio import PDB
 import numpy as np
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_dssp_hel(dssp, ref):
@@ -170,9 +170,9 @@ def dssp_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
 
     """
     cols_dssp = (['prot_name']
-                 + ['DSSP start_H' + str(elem) for elem in range(1, 14)]
-                 + ['DSSP end_H' + str(elem) for elem in range(1, 14)])
-    df_dssp = pd.DataFrame(columns=cols_dssp)
+                 + ['DSSP start_H' + str(elem) for elem in range(1, len(ref)+1)]
+                 + ['DSSP end_H' + str(elem) for elem in range(1, len(ref)+1)])
+    #df_dssp = pd.DataFrame(columns=cols_dssp)
     dssp_hels = None
 
     try:
@@ -195,7 +195,8 @@ def dssp_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
             data_dssp_hels.append(hel[0])
             data_dssp_hels.append(hel[1])
 
-    df_dssp = df_dssp.append(pd.Series(data_dssp_hels, index=cols_dssp[0:len(data_dssp_hels)]), ignore_index=True)
+    df_dssp = pd.DataFrame([data_dssp_hels], columns=cols_dssp)
+    #df_dssp = pd.concat([df_dssp, pd.Series(data_dssp_hels, index=cols_dssp[0:len(data_dssp_hels)])], ignore_index=True)
     return df_dssp
 
 
@@ -218,7 +219,7 @@ def dssp_extra_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
 
     """
     cols_extra_res = ['prot_name', 'N_res extra helical']
-    df_extra = pd.DataFrame(columns=cols_extra_res)
+    #df_extra = pd.DataFrame(columns=cols_extra_res)
     dssp_hels = None
 
     try:
@@ -238,6 +239,7 @@ def dssp_extra_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     data_extra_hels = [protein_name]
     if dssp_hels is not None:
         data_extra_hels.append(dssp_hels[1])
-    df_extra = df_extra.append(pd.Series(data_extra_hels, index=cols_extra_res[0:len(data_extra_hels)]),
-                               ignore_index=True)
+    df_extra = pd.DataFrame([data_extra_hels], columns=cols_extra_res)
+    #df_extra = pd.concat([df_extra, pd.Series(data_extra_hels, index=cols_extra_res[0:len(data_extra_hels)])],
+    #                           ignore_index=True)
     return df_extra

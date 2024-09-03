@@ -1,6 +1,6 @@
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_len_of_hel(chain, ref):
@@ -70,8 +70,8 @@ def len_of_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     pandas.DataFrame with calculated descriptor.
 
     """
-    cols_len = ['prot_name'] + [f'Length H{elem}' for elem in range(1, 14)]
-    df_len = pd.DataFrame(columns=cols_len)
+    cols_len = ['prot_name'] + [f'Length H{elem}' for elem in range(1, len(ref)+1)]
+    #df_len = pd.DataFrame(columns=cols_len)
     lens_hels = None
 
     try:
@@ -92,5 +92,6 @@ def len_of_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     if lens_hels is not None:
         for lens in lens_hels:
             data_lens.append(lens)
-    df_len = df_len.append(pd.Series(data_lens, index=cols_len[0:len(data_lens)]), ignore_index=True)
+    df_len = pd.DataFrame([data_lens], columns=cols_len)
+    #df_len = pd.concat([df_len, pd.Series(data_lens, index=cols_len[0:len(data_lens)])], ignore_index=True)
     return df_len

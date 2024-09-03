@@ -2,8 +2,8 @@ import itertools
 import numpy as np
 import pandas as pd
 
-from COM_helix import _calc_COM_helix
-import utils
+from geodes.COM_helix import _calc_COM_helix
+from geodes import utils
 
 
 def _calc_pairwise_sep_dist(chain, ref):
@@ -70,10 +70,10 @@ def pairwise_sep_dist_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     cols_pairwise = (
         ['prot_name']
         + ['PairwiseSep H' + str(i) + '-H' + str(j)
-            for i in range(1, 14)
-            for j in range(i+1, 14)]
+            for i in range(1, len(ref)+1)
+            for j in range(i+1, len(ref)+1)]
     )
-    df_pairseps = pd.DataFrame(columns=cols_pairwise)
+    #df_pairseps = pd.DataFrame(columns=cols_pairwise)
     pairseps = None
 
     try:
@@ -95,6 +95,7 @@ def pairwise_sep_dist_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
         for elem in pairseps:
             for dist in elem:
                 data_pairseps.append(dist)
-    df_pairseps = df_pairseps.append(pd.Series(data_pairseps, index=cols_pairwise[0:len(data_pairseps)]),
-                                     ignore_index=True)
+    df_pairseps = pd.DataFrame([data_pairseps], columns=cols_pairwise)
+    #df_pairseps = pd.concat([df_pairseps, pd.Series(data_pairseps, index=cols_pairwise[0:len(data_pairseps)])],
+    #                                ignore_index=True)
     return df_pairseps

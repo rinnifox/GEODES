@@ -1,6 +1,6 @@
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_charge_clamp_dist(chain, charge_clamps):
@@ -75,7 +75,7 @@ def charge_clamp_dist_to_pandas(pdb_file, clamp_resid, protein_name=None, **kwar
 
     """
     cols_cl_dist = ['prot_name'] + [f'Dist clamp{elem}' for elem in range(1, 4)]
-    df_cl_dist = pd.DataFrame(columns=cols_cl_dist)
+    #df_cl_dist = pd.DataFrame(columns=cols_cl_dist)
     clamp_dist = None
     try:
         clamp_dist = calc_charge_clamp_dist(pdb_file, clamp_resid)
@@ -95,5 +95,6 @@ def charge_clamp_dist_to_pandas(pdb_file, clamp_resid, protein_name=None, **kwar
     if clamp_dist is not None:
         for elem in clamp_dist:
             cl_dist.append(clamp_dist[elem])
-    df_cl_dist = df_cl_dist.append(pd.Series(cl_dist, index=cols_cl_dist[0:len(cl_dist)]), ignore_index=True)
+    df_cl_dist = pd.DataFrame([cl_dist], columns=cols_cl_dist)
+    #df_cl_dist = pd.concat([df_cl_dist, pd.Series(cl_dist, index=cols_cl_dist[0:len(cl_dist)])], ignore_index=True)
     return df_cl_dist

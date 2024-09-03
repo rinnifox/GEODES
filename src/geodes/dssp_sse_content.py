@@ -1,7 +1,7 @@
 from Bio import PDB
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_sse_content(dssp):
@@ -68,7 +68,7 @@ def sse_content_to_pandas(pdb_file, protein_name=None, **kwargs):
     cols_sse = ['prot_name', 'SSE Helix', 'SSE Beta bridge',
                 'SSE Strand', 'SSE Helix-3', 'SSE Helix-5',
                 'SSE Turn', 'SSE Bend', 'SSE Other']
-    df_sse = pd.DataFrame(columns=cols_sse)
+    #df_sse = pd.DataFrame(columns=cols_sse)
     sse = None
     try:
         sse = calc_sse_content(pdb_file)
@@ -88,5 +88,6 @@ def sse_content_to_pandas(pdb_file, protein_name=None, **kwargs):
     if sse is not None:
         for struct in sse:
             data_sse.append(sse[struct])
-    df_sse = df_sse.append(pd.Series(data_sse, index=cols_sse[0:len(data_sse)]), ignore_index=True)
+    df_sse = pd.DataFrame([data_sse], columns=cols_sse)
+    #df_sse = pd.concat([df_sse, pd.Series(data_sse, index=cols_sse[0:len(data_sse)])], ignore_index=True)
     return df_sse

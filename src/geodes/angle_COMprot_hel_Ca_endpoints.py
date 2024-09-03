@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from COM_protein import _calc_COM_protein
-import utils
+from geodes.COM_protein import _calc_COM_protein
+from geodes  import utils
 
 
 def _calc_COM_Calpha_angles(chain, atom_struct, ref):
@@ -83,8 +83,8 @@ def COM_Calpha_angles_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     pandas.DataFrame with calculated descriptor.
 
     """
-    cols_angle = ['prot_name'] + ['AngleCOM H' + str(elem) for elem in range(1, 14)]
-    df_alphaangle = pd.DataFrame(columns=cols_angle)
+    cols_angle = ['prot_name'] + ['AngleCOM H' + str(elem) for elem in range(1, len(ref)+1)]
+    #df_alphaangle = pd.DataFrame(columns=cols_angle)
     alpha_angle = None
     try:
         alpha_angle = calc_COM_Calpha_angles(pdb_file, ref)
@@ -104,6 +104,7 @@ def COM_Calpha_angles_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     if alpha_angle is not None:
         for elem in alpha_angle:
             data_alphaagnle.append(elem)
-    df_alphaangle = df_alphaangle.append(pd.Series(data_alphaagnle, index=cols_angle[0:len(data_alphaagnle)]),
-                                         ignore_index=True)
+    df_alphaangle = pd.DataFrame([data_alphaagnle], columns=cols_angle)
+    #df_alphaangle = pd.concat([df_alphaangle, pd.Series(data_alphaagnle, index=cols_angle[0:len(data_alphaagnle)])],
+    #                                    ignore_index=True)
     return df_alphaangle

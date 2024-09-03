@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from COM_helix import _calc_COM_helix
-from COM_protein import _calc_COM_protein
-import utils
+from geodes.COM_helix import _calc_COM_helix
+from geodes.COM_protein import _calc_COM_protein
+from geodes import utils
 
 
 def _calc_prot_hel_dist(chain, atom_struct, ref):
@@ -65,8 +65,8 @@ def prot_hel_dist_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     pandas.DataFrame with calculated descriptor.
 
     """
-    cols_protheldist = ['prot_name'] + ['Dist prot-H' + str(elem) for elem in range(1, 14)]
-    df_prothel = pd.DataFrame(columns=cols_protheldist)
+    cols_protheldist = ['prot_name'] + ['Dist prot-H' + str(elem) for elem in range(1, len(ref)+1)]
+    #df_prothel = pd.DataFrame(columns=cols_protheldist)
     prothel = None
 
     try:
@@ -87,6 +87,8 @@ def prot_hel_dist_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     if prothel is not None:
         for elem in prothel:
             data_prothel.append(elem)
-    df_prothel = df_prothel.append(pd.Series(data_prothel, index=cols_protheldist[0:len(data_prothel)]),
-                                   ignore_index=True)
+    #print(data_prothel)
+    df_prothel = pd.DataFrame([data_prothel], columns=cols_protheldist)
+    #df_prothel = pd.concat([df_prothel, pd.Series(data_prothel, index=cols_protheldist[0:len(data_prothel)])],
+    #                               ignore_index=True)
     return df_prothel

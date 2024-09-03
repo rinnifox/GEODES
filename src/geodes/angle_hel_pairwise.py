@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-import utils
+from geodes import utils
 
 
 def _calc_angles_between_hel(chain, ref):
@@ -67,8 +67,8 @@ def angles_between_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     pandas.DataFrame with calculated descriptor.
 
     """
-    cols_cos = ['prot_name'] + [f'Angle H{i}-H{j}' for i in range(1, 13) for j in range(i+1, 14)]
-    df_cos = pd.DataFrame(columns=cols_cos)
+    cols_cos = ['prot_name'] + [f'Angle H{i}-H{j}' for i in range(1, len(ref)) for j in range(i+1, len(ref)+1)]
+    #df_cos = pd.DataFrame(columns=cols_cos)
     cos = None
     try:
         cos = calc_angles_between_hel(pdb_file, ref)
@@ -90,5 +90,6 @@ def angles_between_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
         for elem in cos:
             for angle in elem:
                 data_cos.append(angle)
-    df_cos = df_cos.append(pd.Series(data_cos, index=cols_cos[0:len(data_cos)]), ignore_index=True)
+    df_cos = pd.DataFrame([data_cos], columns=cols_cos)
+    #df_cos = pd.concat([df_cos, pd.Series(data_cos, index=cols_cos[0:len(data_cos)])], ignore_index=True)
     return df_cos

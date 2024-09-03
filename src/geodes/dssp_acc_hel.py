@@ -1,8 +1,7 @@
 from Bio import PDB
 import pandas as pd
 
-import constraints
-import utils
+from geodes import constraints, utils
 
 
 def _calc_acc_per_hel(dssp, ref):
@@ -90,8 +89,8 @@ def acc_per_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
     pandas.DataFrame with calculated descriptor.
 
     """
-    cols_acc = ['prot_name'] + ['ACC H' + str(elem) for elem in range(1, 14)]
-    df_acc = pd.DataFrame(columns=cols_acc)
+    cols_acc = ['prot_name'] + ['ACC H' + str(elem) for elem in range(1, len(ref)+1)]
+    #df_acc = pd.DataFrame(columns=cols_acc)
 
     acc_hels = None
     try:
@@ -113,5 +112,6 @@ def acc_per_hel_to_pandas(pdb_file, ref, protein_name=None, **kwargs):
         for acc in acc_hels:
             data_acc.append(acc_hels[acc])
 
-    df_acc = df_acc.append(pd.Series(data_acc, index=cols_acc[0:len(data_acc)]), ignore_index=True)
+    df_acc = pd.DataFrame([data_acc], columns=cols_acc)
+    #df_acc = pd.concat([df_acc, pd.Series(data_acc, index=cols_acc[0:len(data_acc)])], ignore_index=True)
     return df_acc
