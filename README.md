@@ -18,7 +18,7 @@ Additionally one may need KPAX software for providing user settings for protein 
 
 ## Usage
 
-To see an example of usage of this package, see [`usage_example.ipynb`](usage_example.ipynb)
+To see an example of usage of this package, see [`usage_example.ipynb`](/examples/usage_example.ipynb)
 
 
 ## Authors
