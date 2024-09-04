@@ -24,7 +24,6 @@ To see an example of usage of this package, see [`usage_example.ipynb`](/example
 ## Authors
 - Karina Pats, Visiting Research Assistant, Nazarbayev University; PhD candidate, ITMO University;
 - Igor Glukhov, MSc student (2022-2023), ITMO University
-- Elizaveta Vinogradova, MSc student (2021-2022), ITMO University
 
 
 ## Acknowledgements
