@@ -2,7 +2,7 @@
 This repository contains **GEODES** Python package. This tool is based upon the collection of Python modules for calculating various geometrical descriptors for proteins given their structure as a PDB-file and outputting them in a form of a dataframe or CSV-table.
 
 
-## Installation
+## Installation and pre-requisites
 
 Several descriptors require DSSP module to be installed, this can be done using:
 
@@ -20,6 +20,11 @@ Additionally one may need KPAX software for providing user settings for protein 
 
 To see an example of usage of this package, see [`usage_example.ipynb`](/examples/usage_example.ipynb)
 
+To see an example of result analysis, see[`analysis_example.ipynb`]()
+
+
+## Estimated calculation time
+To run calculations in non-parallel mode, it takes ~3 min for 100 PDB files from `examples/pdb-md/l1`
 
 ## Authors
 - Karina Pats, Visiting Research Assistant, Nazarbayev University; PhD candidate, ITMO University;
