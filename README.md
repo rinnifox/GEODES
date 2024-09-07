@@ -24,7 +24,7 @@ To see an example of result analysis, see[`analysis_example.ipynb`]()
 
 
 ## Estimated calculation time
-To run calculations in non-parallel mode, it takes ~3 min for 100 PDB files from `examples/pdb-md/l1`
+To run calculations in non-parallel mode, it takes ~3 min for 100 PDB files using Ubuntu 22.04 on virtual machine with 2048 MB RAM and 4 CPUs.
 
 ## Authors
 - Karina Pats, Visiting Research Assistant, Nazarbayev University; PhD candidate, ITMO University;
