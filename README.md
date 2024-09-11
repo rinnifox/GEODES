@@ -20,7 +20,7 @@ Additionally one may need KPAX software for providing user settings for protein 
 
 To see an example of usage of this package, see [`usage_example.ipynb`](/examples/usage_example.ipynb)
 
-To see an example of result analysis, see[`analysis_example.ipynb`]()
+To see an example of result analysis, see[`analysis_example.ipynb`](/examples/geodes-analysis/analysis_example.ipynb)
 
 
 ## Estimated calculation time
