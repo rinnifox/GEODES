@@ -3,8 +3,11 @@ This repository contains **GEODES** Python package. This tool is based upon the 
 
 
 ## Installation and pre-requisites
+The libraries that are necessary for using GEODES can be installed by downloading this repository and running:
 
-Several descriptors require DSSP module to be installed, this can be done using:
+`pip install -r requirements.txt `
+
+Several descriptors also require DSSP module, this can be done using:
 
 `conda install salilab::dssp`
 
@@ -15,6 +18,10 @@ The alternative installation using:
 should be chosen with caution as currently the clean installation of DSSP 4.0.4 (intended for Ubuntu 22.04) does not work properly. It might be working on other versions though.
 
 Additionally one may need KPAX software for providing user settings for protein helices borders: http://kpax.loria.fr/
+
+GEODES package can be installed by running this command from the root of the repository:
+
+`pip install .`
 
 ## Usage
 
@@ -35,4 +42,4 @@ To run calculations in non-parallel mode, it takes ~3 min for 100 PDB files usin
 - Dr. Ferdinand Molnár, Associate Professor, Nazarbayev University
 - Dr. Marie-Dominique Devignes, Lorraine Research Laboratory in Computer Science and its Applications, University of Lorraine
 - Stepan Petrosyan, Bioinformatics Institute student (2019/2020)
-- Maria Mamayeva, Bioinformatics Institute student (2019/2020)
+- Maria Mamaeva, Bioinformatics Institute student (2019/2020)
